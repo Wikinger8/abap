@@ -49,7 +49,7 @@ CLASS zcl_15_demo_08 IMPLEMENTATION.
 
     out->write( connection ).
 
-    " Definition der Zielvariablen (1. inlinedeklaration)
+    " Definition der Zielvariablen (1. inlinedeklaration)f
     SELECT SINGLE FROM /dmo/connection
       FIELDS carrier_id, connection_id, airport_from_id, airport_to_id
       WHERE carrier_id = @carrier_id AND connection_id = @connection_id
