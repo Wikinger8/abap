@@ -1,24 +1,26 @@
 CLASS zcl_15_airplane DEFINITION
   PUBLIC
-  FINAL
   CREATE PUBLIC .
 
   PUBLIC SECTION.
     METHODS constructor IMPORTING !id                  TYPE string
                                   plane_type           TYPE string
                                   empty_weight_in_tons TYPE i
-                        RAISING
-                          zcx_abap_initial_parameter.
+                        RAISING   zcx_abap_initial_parameter.
+
+    METHODS get_total_weight_in_tons
+      IMPORTING emptyweight        TYPE i
+      RETURNING VALUE(weight) TYPE i.
 
     DATA id                   TYPE string READ-ONLY.
     DATA plane_type           TYPE string READ-ONLY.
     DATA empty_weight_in_tons TYPE i      READ-ONLY.
 
-
     CLASS-DATA number_of_airplanes TYPE i READ-ONLY.
 
   PROTECTED SECTION.
   PRIVATE SECTION.
+
 ENDCLASS.
 
 
@@ -47,5 +49,9 @@ if empty_weight_in_tons is initial.
 
     number_of_airplanes += 1.
   endmethod.
+
+  METHOD get_total_weight_in_tons.
+weight = emptyweight * '1.1'.
+  ENDMETHOD.
 
 ENDCLASS.

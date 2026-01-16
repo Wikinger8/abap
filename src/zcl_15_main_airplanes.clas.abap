@@ -27,9 +27,9 @@ CLASS zcl_15_main_airplanes IMPLEMENTATION.
     ENDTRY.
 
     TRY.
-        airplane = NEW #( id                   = 'Porsssssssche'
+        airplane = NEW zcl_15_passenger_plane( id                   = 'Porsssssssche'
                           plane_type           = '91333331'
-                          empty_weight_in_tons = '19' ).
+                          empty_weight_in_tons = '19'  number_of_seats = '6' ).
         APPEND airplane TO airplanes.
 
       CATCH zcx_abap_initial_parameter.
@@ -37,9 +37,9 @@ CLASS zcl_15_main_airplanes IMPLEMENTATION.
 
     TRY.
 
-        airplane = NEW #( id                   = 'Porfffffffsche'
+        airplane = NEW zcl_15_cargo_plane( id                   = 'Porfffffffsche'
                           plane_type           = '91222221'
-                          empty_weight_in_tons = '92' ).
+                          empty_weight_in_tons = '92' cargo_in_tons = '4' ).
         APPEND airplane TO airplanes.
 
       CATCH zcx_abap_initial_parameter.

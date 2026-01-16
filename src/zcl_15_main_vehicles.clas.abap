@@ -23,7 +23,13 @@ CLASS zcl_15_main_vehicles IMPLEMENTATION.
 
     out->write( zcl_15_vehicle=>number_of_vehicles ).
 
-  vehicle = new #( make = 'Porsche' model = '911' ).
+
+  vehicle = new zcl_15_car( make = 'Porschcare' model = '911' seats = 2 ). "upcast
+
+
+
+  append vehicle to vehicles.
+  vehicle = new zcl_15_truck( make = 'Porstruckhe' model = '911' cargo_in_tons = 2 ). "upcast
 
 
 
@@ -40,11 +46,12 @@ CLASS zcl_15_main_vehicles IMPLEMENTATION.
   try.
   vehicle->accelerate( 30 ).
   vehicle->brake( 10 ).
-  vehicle->accelerate( 3030 ).
+  vehicle->accelerate( 30 ).
   catch zcx_15_value_too_high into data(x).
   out->write( x->get_text( ) ).
   endtry.
-  out->write( |{ vehicle->make } { vehicle->model }| ).
+  "out->write( |{ vehicle->make } { vehicle->model }| ).
+  out->write( vehicle->to_string(  ) ).
 
   endloop.
 
