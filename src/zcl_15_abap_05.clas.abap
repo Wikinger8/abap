@@ -19,11 +19,8 @@ CLASS zcl_15_abap_05 IMPLEMENTATION.
 
     DATA customer TYPE z15_customer_info.
 
-    TRY.
-        customer = zcl_abap_helper=>get_customer( 000001 ).
-      CATCH zcx_abap_no_data INTO DATA(x).
-        customer = 0.
-    ENDTRY.
+       " customer = zcl_abap_helper=>get_customer( 000001 ).
+
 
     out->write( customer ).
 

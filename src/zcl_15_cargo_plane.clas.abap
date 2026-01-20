@@ -42,7 +42,7 @@ CLASS zcl_15_cargo_plane IMPLEMENTATION.
 
   ENDMETHOD.
   METHOD get_total_weight_in_tons.
-we = em * '1.1' + cargo_in_tons.
+weight = emptyweight * '1.1' + cargo_in_tons.
   ENDMETHOD.
 
 ENDCLASS.

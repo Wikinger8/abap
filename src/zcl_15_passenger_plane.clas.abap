@@ -41,7 +41,7 @@ CLASS zcl_15_passenger_plane IMPLEMENTATION.
 
   ENDMETHOD.
   METHOD get_total_weight_in_tons.
-we = em * '1.1' + number_of_seats * '0.08'.
+weight = emptyweight * '1.1' + number_of_seats * '0.08'.
   ENDMETHOD.
 
 ENDCLASS.

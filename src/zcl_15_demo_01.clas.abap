@@ -137,11 +137,8 @@ CLASS zcl_15_demo_01 IMPLEMENTATION.
     DATA result TYPE p DECIMALS 2.
 
     IF op = '**'.
-      TRY.
-          result = zcl_abap_calculator=>calculate_power( base = op1 exponent = CONV i( op2 ) ).
-        CATCH zcx_abap_exponent_too_high INTO DATA(x).
-          result = 0.
-      ENDTRY.
+     "     result = zcl_15_calculator=>divide( base = op1 exponent = CONV i( op2 ) ).
+
       out->write( |{ op1 NUMBER = USER } { op } { CONV i( op2 ) } = { result NUMBER = USER }| ).
 
     ELSE.

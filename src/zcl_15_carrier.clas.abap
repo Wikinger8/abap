@@ -4,6 +4,8 @@ CLASS zcl_15_carrier DEFINITION
   CREATE PUBLIC .
 
   PUBLIC SECTION.
+
+  interfaces zif_15_partner.
     METHODS add_airplane            IMPORTING airplane     TYPE REF TO zcl_15_airplane.
     METHODS get_biggest_cargo_plane RETURNING VALUE(resultplane) TYPE REF TO zcl_15_airplane.
 
@@ -47,6 +49,11 @@ CLASS zcl_15_carrier IMPLEMENTATION.
     ENDLOOP.
 
     resultplane = cargo_plane.
+  ENDMETHOD.
+
+  METHOD zif_15_partner~to_string.
+
+  string = 'Ich bin die Fluggesellschaft'.
   ENDMETHOD.
 
 ENDCLASS.
