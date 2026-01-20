@@ -7,10 +7,10 @@
 @Metadata.ignorePropagatedAnnotations: true
 
 define view entity Z15_Demo02
-  as select from /dmo/connection as c
+  as select from    /dmo/connection as c
 
-    inner join   /dmo/carrier    as a on c.carrier_id = a.carrier_id
-    inner join   /dmo/flight     as f on f.carrier_id = c.carrier_id and f.connection_id = c.connection_id
+    left outer join /dmo/carrier    as a on c.carrier_id = a.carrier_id
+    left outer join      /dmo/flight     as f on f.carrier_id = c.carrier_id and f.connection_id = c.connection_id
 
 {
   key a.carrier_id      as CarrierId,
@@ -22,4 +22,4 @@ define view entity Z15_Demo02
       c.airport_to_id   as AirportToId
 }
 
-where c.carrier_id = 'LH' and c.connection_id = '0400'
+//where c.carrier_id = 'LH' and c.connection_id = '0400'
