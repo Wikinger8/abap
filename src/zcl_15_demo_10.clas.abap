@@ -1,4 +1,4 @@
-CLASS zcl_15_abap_cds_06 DEFINITION
+CLASS zcl_15_demo_10 DEFINITION
   PUBLIC
   FINAL
   CREATE PUBLIC .
@@ -12,14 +12,18 @@ ENDCLASS.
 
 
 
-CLASS zcl_15_abap_cds_06 IMPLEMENTATION.
+CLASS zcl_15_demo_10 IMPLEMENTATION.
   METHOD if_oo_adt_classrun~main.
     SELECT
-      FROM Z15_CustomerKPIs( P_City = 'Heidelberg' )
-      FIELDS *
+      FROM Z15_Demo02
+      FIELDS CarrierId, ConnectionId, \_Carrier-name
           " WHERE CarrierId = 'LH'
-      INTO TABLE @DATA(cities).
+      INTO TABLE @DATA(connections).
 
-    out->write( cities ).
+    out->write( connections ).
+
+
+
+
   ENDMETHOD.
 ENDCLASS.

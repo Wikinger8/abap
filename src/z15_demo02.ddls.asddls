@@ -7,19 +7,24 @@
 @Metadata.ignorePropagatedAnnotations: true
 
 define view entity Z15_Demo02
-  as select from    /dmo/connection as c
+  as select from /dmo/connection
 
-    left outer join /dmo/carrier    as a on c.carrier_id = a.carrier_id
-    left outer join      /dmo/flight     as f on f.carrier_id = c.carrier_id and f.connection_id = c.connection_id
+  association [1..1] to /dmo/carrier as _Carrier
+    on $projection.CarrierId = _Carrier.carrier_id
+
+  association [0..*] to /dmo/flight  as _Flights
+    on  _Flights.carrier_id    = $projection.CarrierId
+    and _Flights.connection_id = $projection.ConnectionId
 
 {
-  key a.carrier_id      as CarrierId,
-  key c.connection_id   as ConnectionId,
-  key f.flight_date     as FlightDate,
-
-      a.name            as Name,
-      c.airport_from_id as AirportFromId,
-      c.airport_to_id   as AirportToId
+  key /dmo/connection.carrier_id      as CarrierId,
+  key connection_id   as ConnectionId,
+      airport_from_id as AirportFromId,
+      airport_to_id   as AirportToId,
+      
+      // Associations
+      _Carrier,
+      _Flights
 }
 
 //where c.carrier_id = 'LH' and c.connection_id = '0400'
