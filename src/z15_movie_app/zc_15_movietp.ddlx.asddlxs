@@ -1,0 +1,67 @@
+@Metadata.layer: #CUSTOMER
+
+@UI.headerInfo: { typeNamePlural: 'Movies',
+                  typeName: 'Movie',
+                  title.value: 'Title',
+                  description.value: 'PublishingYear',
+                  imageUrl: 'ImageURL' }
+
+@UI.lineItem: [ { criticality: 'AverageRatingCriticality' } ]
+@UI.presentationVariant: [ { sortOrder: [ { by: 'AverageRating', direction: #DESC } ] } ]
+
+annotate entity ZC_15_MovieTP
+  with
+
+{
+  @UI.facet: [ { position: 10, type: #FIELDGROUP_REFERENCE, targetQualifier: 'Details', label: 'Movie Details' },
+               { position: 20, type: #FIELDGROUP_REFERENCE, targetQualifier: 'Admin', label: 'Administrative Data' },
+               { position: 20, type: #LINEITEM_REFERENCE, targetElement: '_Ratings', label: 'Ratings' } ]
+  @UI.fieldGroup: [ { position: 9, qualifier: 'Details' } ]
+  @UI.lineItem: [ { position: 50 } ]
+  ImageURL;
+
+  @UI.fieldGroup: [ { position: 10, qualifier: 'Details' } ]
+  @UI.lineItem: [ { position: 10 } ]
+  Title;
+
+  @UI.fieldGroup: [ { position: 20, qualifier: 'Details' } ]
+  @UI.lineItem: [ { position: 20 } ]
+  @UI.selectionField: [ { position: 10 } ]
+  Genre;
+
+  @UI.fieldGroup: [ { position: 30, qualifier: 'Details' } ]
+  @UI.lineItem: [ { position: 30 } ]
+  @UI.selectionField: [ { position: 20 } ]
+  PublishingYear;
+
+  @UI.fieldGroup: [ { position: 40, qualifier: 'Details' } ]
+  @UI.lineItem: [ { position: 40 } ]
+  @UI.selectionField: [ { position: 30 } ]
+  RuntimeInMin;
+
+  @UI.fieldGroup: [ { position: 9, qualifier: 'Admin' } ]
+  MovieUUID;
+
+  @UI.fieldGroup: [ { position: 10, qualifier: 'Admin' } ]
+  CreatedAt;
+
+  @UI.fieldGroup: [ { position: 10, qualifier: 'Admin' } ]
+  CreatedBy;
+
+  @UI.fieldGroup: [ { position: 10, qualifier: 'Admin' } ]
+  LastChangedAt;
+
+  @UI.fieldGroup: [ { position: 10, qualifier: 'Admin' } ]
+  LastChangedBy;
+
+
+  @UI.fieldGroup: [ { position: 999,
+                      qualifier: 'Details',
+                      criticality: 'AverageRatingCriticality',
+                      criticalityRepresentation: #WITHOUT_ICON } ]
+  @UI.lineItem: [ { position: 999, criticality: 'AverageRatingCriticality', criticalityRepresentation: #WITHOUT_ICON } ]
+  AverageRating;
+
+  @UI.hidden: true
+  AverageRatingCriticality;
+}

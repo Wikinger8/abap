@@ -4,8 +4,6 @@
 
 @EndUserText.label: 'fd'
 
-@Metadata.ignorePropagatedAnnotations: true
-
 define view entity Z15_Demo02
   as select from /dmo/connection
 

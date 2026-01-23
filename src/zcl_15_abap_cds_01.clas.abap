@@ -1,14 +1,20 @@
-class ZCL_15_ABAP_CDS_01 definition
-  public
-  final
-  create public .
+CLASS zcl_15_abap_cds_01 DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
 
-public section.
-protected section.
-private section.
+  PUBLIC SECTION.
+
+    INTERFACES if_oo_adt_classrun .
+  PROTECTED SECTION.
+  PRIVATE SECTION.
 ENDCLASS.
 
 
 
-CLASS ZCL_15_ABAP_CDS_01 IMPLEMENTATION.
+CLASS zcl_15_abap_cds_01 IMPLEMENTATION.
+
+
+  METHOD if_oo_adt_classrun~main.
+  ENDMETHOD.
 ENDCLASS.
