@@ -21,7 +21,7 @@ association [0..1] to ZI_15_AverageRating as _AverageRating on $projection.Movie
   CreatedBy,
   LastChangedAt,
   LastChangedBy,
-  
+ 
   
 
   

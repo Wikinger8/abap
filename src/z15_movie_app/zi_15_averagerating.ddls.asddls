@@ -13,16 +13,16 @@ define view entity ZI_15_AverageRating
   key movie_uuid                   as MovieUuid,
 
       case
-      when avg(rating as abap.dec(4,1)) > 6.7 then 3
-      when avg(rating as abap.dec(4,1)) > 3.4 then 2
-      when avg(rating as abap.dec(4,1)) > 0 then 1
+      when avg(rating as abap.dec(16,1)) > 6.7 then 3
+      when avg(rating as abap.dec(16,1)) > 3.4 then 2
+      when avg(rating as abap.dec(16,1)) > 0 then 1
       else 0
     end                            as AverageRatingCriticality,
 
 
       @EndUserText.label: 'Average Rating'
       @EndUserText.quickInfo: 'Average Rating'
-      avg(rating as abap.dec(4,1)) as AverageRating
+      avg(rating as abap.dec(16,1)) as AverageRating
 }
 
 group by movie_uuid
