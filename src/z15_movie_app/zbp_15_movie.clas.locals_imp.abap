@@ -58,6 +58,8 @@ CLASS lhc_Movie DEFINITION INHERITING FROM cl_abap_behavior_handler.
       IMPORTING REQUEST requested_authorizations FOR Movie RESULT result.
     METHODS ValidateGenre FOR VALIDATE ON SAVE
       IMPORTING keys FOR Movie~ValidateGenre.
+    METHODS RateMovie FOR MODIFY
+      IMPORTING keys FOR ACTION Movie~RateMovie. "RESULT result.
 
 ENDCLASS.
 
@@ -98,6 +100,51 @@ CLASS lhc_Movie IMPLEMENTATION.
                         %msg = message
                         %element-genre = if_abap_behv=>mk-on ) TO reported-movie.
       ENDIF.
+    ENDLOOP.
+  ENDMETHOD.
+
+  METHOD RateMovie.
+    DATA ratings TYPE TABLE FOR CREATE ZR_15_MovieTP\_Ratings.
+
+    DATA(valid_keys) = keys.
+    " Process Movie-Keys
+    LOOP AT keys INTO DATA(key).
+      " Validate Rating
+      IF key-%param-Rating < 1 OR key-%param-Rating > 100.
+        CONTINUE.
+      ENDIF.
+
+      CONTINUE.
+
+      " Create Error Message
+      DATA(message) = NEW zcm_abap_movie( textid   = zcm_abap_movie=>invalid_rating
+                                          rating   = key-%param-Rating
+                                          severity = if_abap_behv_message=>severity-error ).
+
+      APPEND VALUE #( %tky              = key-%tky
+                      %msg              = message
+                      %action-RateMovie = if_abap_behv=>mk-on ) TO reported-movie.
+
+      APPEND VALUE #( %tky = key-%tky ) TO failed-movie.
+
+      DELETE valid_keys WHERE %tky = key-%tky.
+    ENDLOOP.
+    " Check Movie-Keys
+    IF valid_keys IS INITIAL.
+      RETURN.
+    ENDIF.
+
+    " Create Ratings
+    LOOP AT valid_keys INTO key.
+      APPEND VALUE #( %tky    = key-%tky
+                      %target = VALUE #( ( Rating = key-%param-Rating ) ) ) TO ratings.
+
+      MODIFY ENTITIES OF ZR_15_MovieTP IN LOCAL MODE
+             ENTITY Movie
+             CREATE BY \_Ratings
+             AUTO FILL CID
+             FIELDS ( Rating )
+             WITH ratings.
     ENDLOOP.
   ENDMETHOD.
 
